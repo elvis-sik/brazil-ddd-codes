@@ -188,6 +188,11 @@ def shared_css() -> str:
     linear-gradient(180deg, rgba(47,93,80,0.08), rgba(255,255,255,0.72));
   padding:18px 18px 16px;
 }
+.answer-panel-fixed{
+  margin-top:0;
+  margin-bottom:18px;
+  min-height:112px;
+}
 .answer-label{
   font-family:"Avenir Next","Gill Sans","Trebuchet MS",sans-serif;
   text-transform:uppercase;
@@ -201,6 +206,14 @@ def shared_css() -> str:
   line-height:1.04;
   margin:0;
   color:var(--forest);
+}
+.answer-main-slot{
+  min-height:40px;
+  display:flex;
+  align-items:flex-start;
+}
+.answer-main-placeholder{
+  opacity:0;
 }
 .meta-grid{
   display:grid;
@@ -305,10 +318,15 @@ def model() -> genanki.Model:
 </div></div>
 """,
                 "afmt": """
-{{FrontSide}}
-<div class="wrap"><div class="answer-panel">
-  <div class="answer-label">Locator Map</div>
+<div class="wrap"><div class="plate">
+  <div class="eyebrow">Brazilian Telephone Area Code</div>
+  <h1 class="title">DDD {{ddd_code}}</h1>
+  <div class="subtitle">Start from the municipal blank map, then reveal the highlighted area.</div>
+  <div class="prompt">Which part of Brazil does this DDD cover?</div>
   {{Card_LocatorMap_HTML}}
+</div></div>
+<div class="wrap"><div class="answer-panel">
+  <div class="answer-label">Locator Details</div>
   <div class="meta-grid">{{Card_States_HTML}}{{Card_Stats_HTML}}</div>
 </div></div>
 """,
@@ -318,15 +336,26 @@ def model() -> genanki.Model:
                 "qfmt": """
 <div class="wrap"><div class="plate">
   <div class="eyebrow">Name The DDD</div>
+  <div class="answer-panel answer-panel-fixed">
+    <div class="answer-label">Answer</div>
+    <div class="answer-main answer-main-slot"><span class="answer-main-placeholder">DDD 99</span></div>
+  </div>
   {{Card_LocatorMap_HTML}}
   <div class="prompt">Which Brazilian DDD code is highlighted here?</div>
 </div></div>
 """,
                 "afmt": """
-{{FrontSide}}
+<div class="wrap"><div class="plate">
+  <div class="eyebrow">Name The DDD</div>
+  <div class="answer-panel answer-panel-fixed">
+    <div class="answer-label">Answer</div>
+    <div class="answer-main answer-main-slot">DDD {{ddd_code}}</div>
+  </div>
+  {{Card_LocatorMap_HTML}}
+  <div class="prompt">Which Brazilian DDD code is highlighted here?</div>
+</div></div>
 <div class="wrap"><div class="answer-panel">
-  <div class="answer-label">Answer</div>
-  <div class="answer-main">DDD {{ddd_code}}</div>
+  <div class="answer-label">Locator Details</div>
   <div class="meta-grid">{{Card_States_HTML}}{{Card_SampleMunicipalities_HTML}}</div>
 </div></div>
 """,
