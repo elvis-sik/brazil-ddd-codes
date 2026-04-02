@@ -10,6 +10,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 SOURCE_CSV = REPO_ROOT / "data/raw/map_asset_sources.csv"
 DEST_BY_ASSET_ID = {
     "ddd_brazil_map_commons": REPO_ROOT / "media/source/Mapa_do_Brasil_por_codigo_DDD.svg",
+    "blank_brazil_states_commons": REPO_ROOT / "media/source/Blank_Map_of_Brazil.svg",
 }
 
 USER_AGENT = (

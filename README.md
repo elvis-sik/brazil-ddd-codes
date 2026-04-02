@@ -31,6 +31,8 @@ Everything here should be treated as editable project output, not as an authorit
 - `scripts/fetch_reference_data.py`: downloads and extracts the official municipality-to-CN reference table
 - `scripts/inspect_source_svg.py`: inspects the original SVG structure for reusable map-generation hooks
 - `scripts/generate_maps.py`: generates blank-map and locator-map assets
+- `scripts/build_apkg.py`: builds the Anki package with the three DDD card templates
+- `DDD_NOTE_TYPE.md`: note fields and card-template contract
 - `DDD_DECK_PLAN.md`: current scope and build plan
 
 ## Build workflow
@@ -38,7 +40,7 @@ Everything here should be treated as editable project output, not as an authorit
 Install dependencies:
 
 ```sh
-uv sync
+uv sync --extra deck
 ```
 
 Fetch the source SVG:
@@ -67,11 +69,22 @@ Generate blank and locator maps:
 
 By default, the generator writes:
 
-- one blank SVG and PNG base map
+- one blank municipal SVG and PNG base map
+- one state-outline-only SVG and PNG base map
 - one PNG locator map per `DDD`
 - one `ddd_codes.csv` summary table derived from the official reference data
 
 The script can also emit per-`DDD` SVGs, but those are intentionally optional because they remain very large when derived from the full municipal source geometry.
+
+Build the deck package:
+
+```sh
+.venv/bin/python scripts/build_apkg.py
+```
+
+Output:
+
+- `out/brazil-ddd-codes.apkg`
 
 ## Primary source
 

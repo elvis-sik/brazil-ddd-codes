@@ -14,9 +14,12 @@ from xml.etree import ElementTree as ET
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 SOURCE_SVG = REPO_ROOT / "media/source/Mapa_do_Brasil_por_codigo_DDD.svg"
+STATE_OUTLINE_SOURCE_SVG = REPO_ROOT / "media/source/Blank_Map_of_Brazil.svg"
 CN_CSV = REPO_ROOT / "data/raw/Codigos_Nacionais.csv"
 BLANK_SVG = REPO_ROOT / "media/blank/brazil_blank_municipal_map.svg"
 BLANK_PNG = REPO_ROOT / "media/raster/brazil_blank_municipal_map.png"
+STATE_OUTLINE_SVG = REPO_ROOT / "media/blank/brazil_state_outline_map.svg"
+STATE_OUTLINE_PNG = REPO_ROOT / "media/raster/brazil_state_outline_map.png"
 LOCATOR_PNG_DIR = REPO_ROOT / "media/raster/locator"
 LOCATOR_SVG_DIR = REPO_ROOT / "media/locator/svg"
 DDD_SUMMARY_CSV = REPO_ROOT / "data/raw/ddd_codes.csv"
@@ -163,6 +166,24 @@ def write_blank_assets(
     render_png(BLANK_SVG, BLANK_PNG, png_width)
 
 
+def write_state_outline_assets(png_width: int) -> None:
+    state_root = ET.parse(STATE_OUTLINE_SOURCE_SVG).getroot()
+    strip_text_nodes(state_root)
+    for element in state_root.iter():
+        if local_name(element.tag) not in {"path", "polygon"}:
+            continue
+        element.set("fill", NEUTRAL_FILL)
+        element.set("stroke", MUNICIPAL_STROKE)
+        element.set("stroke-width", "1.5")
+    reset_title_desc(
+        state_root,
+        "Brazil state outline map",
+        "Blank map of Brazil showing state outlines only.",
+    )
+    write_svg(STATE_OUTLINE_SVG, state_root)
+    render_png(STATE_OUTLINE_SVG, STATE_OUTLINE_PNG, png_width)
+
+
 def write_locator_assets(
     source_root: ET.Element,
     municipalities: dict[str, dict[str, str]],
@@ -234,6 +255,11 @@ def main() -> int:
         raise FileNotFoundError(
             f"Missing source SVG at {SOURCE_SVG}. Run scripts/fetch_map_assets.py first."
         )
+    if not STATE_OUTLINE_SOURCE_SVG.exists():
+        raise FileNotFoundError(
+            "Missing state-outline SVG at "
+            f"{STATE_OUTLINE_SOURCE_SVG}. Run scripts/fetch_map_assets.py first."
+        )
     if not CN_CSV.exists():
         raise FileNotFoundError(
             f"Missing CN CSV at {CN_CSV}. Run scripts/fetch_reference_data.py first."
@@ -253,6 +279,7 @@ def main() -> int:
 
     write_ddd_summary(rows, missing_in_svg)
     write_blank_assets(source_root, municipalities, args.png_width)
+    write_state_outline_assets(args.png_width)
     write_locator_assets(source_root, municipalities, args.png_width, args.write_svg_locators)
 
     if missing_in_svg:
