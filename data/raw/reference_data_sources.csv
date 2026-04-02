@@ -1,0 +1,2 @@
+asset_id,title,download_url,license,author,notes
+anatel_codigos_nacionais,"Codigos_Nacionais.csv","https://www.anatel.gov.br/dadosabertos/paineis_de_dados/areastarifarias/pgcn.zip","Open government data","ANATEL","Official municipality-to-CN table distributed inside pgcn.zip."

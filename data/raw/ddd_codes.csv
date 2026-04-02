@@ -1,0 +1,68 @@
+ddd_code,municipality_count,missing_geometry_municipality_count,states,sample_municipalities
+11,64,0,SP,Alumínio | Araçariguama | Arujá | Atibaia | Barueri
+12,38,0,SP,Aparecida | Arapeí | Areias | Bananal | Caçapava
+13,22,0,SP,Bertioga | Cajati | Cananéia | Cubatão | Eldorado
+14,100,0,SP,Águas de Santa Bárbara | Agudos | Álvaro de Carvalho | Alvinlândia | Anhembi
+15,49,0,SP,Alambari | Angatuba | Apiaí | Araçoiaba da Serra | Barão de Antonina
+16,74,0,SP,Altinópolis | Américo Brasiliense | Aramina | Araraquara | Barrinha
+17,117,0,SP,Adolfo | Altair | Álvares Florence | Américo de Campos | Aparecida d'Oeste
+18,108,0,SP,Adamantina | Alfredo Marcondes | Alto Alegre | Álvares Machado | Andradina
+19,73,0,SP,Aguaí | Águas da Prata | Águas de Lindóia | Águas de São Pedro | Americana
+21,23,0,RJ,Belford Roxo | Cachoeiras de Macacu | Duque de Caxias | Guapimirim | Itaboraí
+22,43,0,RJ,Aperibé | Araruama | Armação dos Búzios | Arraial do Cabo | Bom Jardim
+24,26,0,RJ,Angra dos Reis | Areal | Barra do Piraí | Barra Mansa | Comendador Levy Gasparian
+27,50,0,ES,Afonso Cláudio | Águia Branca | Água Doce do Norte | Alfredo Chaves | Alto Rio Novo
+28,28,0,ES,Alegre | Anchieta | Apiacá | Atílio Vivácqua | Bom Jesus do Norte
+31,139,0,MG,Abre Campo | Acaiaca | Alvinópolis | Alvorada de Minas | Amparo do Serra
+32,122,0,MG,Além Paraíba | Alfredo Vasconcelos | Alto Caparaó | Alto Rio Doce | Antônio Carlos
+33,175,0,MG,Açucena | Água Boa | Águas Formosas | Águas Vermelhas | Aimorés
+34,70,0,MG,Abadia dos Dourados | Água Comprida | Araguari | Araporã | Arapuá
+35,159,0,MG,Aguanil | Aiuruoca | Alagoa | Albertina | Alfenas
+37,61,0,MG,Abaeté | Araújos | Arcos | Bambuí | Biquinhas
+38,127,0,MG,Arinos | Augusto de Lima | Berizal | Bocaiúva | Bonfinópolis de Minas
+41,35,0,PR,Adrianópolis | Agudos do Sul | Almirante Tamandaré | Antonina | Araucária
+42,57,0,PR|SC,Antônio Olinto | Bituruna | Boa Ventura de São Roque | Campina do Simão | Candói
+43,98,0,PR,Abatiá | Alvorada do Sul | Andirá | Apucarana | Arapongas
+44,124,0,PR,Altamira do Paraná | Altônia | Alto Paraná | Alto Piquiri | Amaporã
+45,41,0,PR,Anahy | Boa Vista da Aparecida | Braganey | Cafelândia | Campo Bonito
+46,43,0,PR,Ampére | Bela Vista da Caroba | Boa Esperança do Iguaçu | Bom Jesus do Sul | Bom Sucesso do Sul
+47,79,0,PR|SC,Rio Negro | Agrolândia | Agronômica | Apiúna | Araquari
+48,67,0,SC,Águas Mornas | Alfredo Wagner | Angelina | Anitápolis | Antônio Carlos
+49,150,0,PR|SC,Barracão | Abdon Batista | Abelardo Luz | Água Doce | Águas de Chapecó
+51,157,0,RS,Alto Feliz | Alvorada | Amaral Ferrador | Anta Gorda | Arambaré
+53,25,0,RS,Aceguá | Arroio do Padre | Arroio Grande | Bagé | Candiota
+54,155,0,RS,Água Santa | Almirante Tamandaré do Sul | Alto Alegre | André da Rocha | Antônio Prado
+55,160,0,RS,Agudo | Ajuricaba | Alecrim | Alegrete | Alegria
+61,13,0,DF|GO,Águas Lindas de Goiás | Cabeceiras | Cidade Ocidental | Cristalina | Formosa
+62,132,0,GO,Abadia de Goiás | Abadiânia | Água Fria de Goiás | Alexânia | Alto Horizonte
+63,139,0,TO,Abreulândia | Aguiarnópolis | Aliança do Tocantins | Almas | Alvorada
+64,102,0,GO,Acreúna | Adelândia | Água Limpa | Aloândia | Americano do Brasil
+65,50,0,MT,Acorizal | Alto Paraguai | Araputanga | Arenápolis | Barão de Melgaço
+66,92,1,MT,Água Boa | Alta Floresta | Alto Araguaia | Alto Boa Vista | Alto Garças
+67,79,0,MS,Água Clara | Alcinópolis | Amambai | Anastácio | Anaurilândia
+68,22,0,AC,Acrelândia | Assis Brasil | Brasiléia | Bujari | Capixaba
+69,52,0,RO,Alta Floresta D'Oeste | Ariquemes | Cabixi | Cacoal | Cerejeiras
+71,15,0,BA,Camaçari | Candeias | Catu | Dias d'Ávila | Itaparica
+73,91,0,BA,Aiquara | Alcobaça | Almadina | Apuarema | Arataca
+74,60,0,BA,América Dourada | Andorinha | Antônio Gonçalves | Baixa Grande | Barra
+75,143,0,BA,Abaré | Acajutiba | Adustina | Água Fria | Alagoinhas
+77,108,0,BA,Abaíra | Érico Cardoso | Anagé | Angical | Aracatu
+79,75,0,SE,Amparo do São Francisco | Aquidabã | Aracaju | Arauá | Areia Branca
+81,98,1,PE,Abreu e Lima | Agrestina | Água Preta | Aliança | Altinho
+82,102,0,AL,Água Branca | Anadia | Arapiraca | Atalaia | Barra de Santo Antônio
+83,223,0,PB,Água Branca | Aguiar | Alagoa Grande | Alagoa Nova | Alagoinha
+84,167,0,RN,Acari | Açu | Afonso Bezerra | Água Nova | Alexandria
+85,43,0,CE,Acarape | Apuiarés | Aquiraz | Aracoiaba | Aratuba
+86,84,0,PI,Agricolândia | Água Branca | Alto Longá | Altos | Amarante
+87,87,0,PE,Afogados da Ingazeira | Afrânio | Águas Belas | Alagoinha | Angelim
+88,141,0,CE,Abaiara | Acaraú | Acopiara | Aiuaba | Alcântaras
+89,140,0,PI,Acauã | Alagoinha do Piauí | Alegrete do Piauí | Alvorada do Gurguéia | Anísio de Abreu
+91,81,0,PA,Abaetetuba | Acará | Afuá | Anajás | Ananindeua
+92,24,0,AM,Autazes | Barreirinha | Boa Vista do Ramos | Borba | Caapiranga
+93,26,0,PA,Alenquer | Almeirim | Altamira | Aveiro | Belterra
+94,37,0,PA,Abel Figueiredo | Água Azul do Norte | Bannach | Bom Jesus do Tocantins | Brejo Grande do Araguaia
+95,15,0,RR,Amajari | Alto Alegre | Boa Vista | Bonfim | Cantá
+96,16,0,AP,Serra do Navio | Amapá | Pedra Branca do Amapari | Calçoene | Cutias
+97,38,0,AM,Alvarães | Amaturá | Anamã | Anori | Apuí
+98,115,0,MA,Afonso Cunha | Água Doce do Maranhão | Alcântara | Altamira do Maranhão | Alto Alegre do Pindaré
+99,102,0,MA,Açailândia | Aldeias Altas | Alto Alegre do Maranhão | Alto Parnaíba | Amarante do Maranhão
