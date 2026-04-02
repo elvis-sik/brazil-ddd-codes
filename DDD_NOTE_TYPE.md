@@ -8,7 +8,6 @@ One note per `DDD` code.
 
 1. `DDD + blank municipal map -> locator`
 2. `locator -> DDD`
-3. `DDD + state-outline-only map -> locator`
 
 ## Core fields
 
@@ -18,11 +17,9 @@ One note per `DDD` code.
 - `missing_geometry_municipality_count`
 - `sample_municipalities`
 - `blank_map`
-- `state_outline_map`
 - `locator_map`
 
 ## Design goals
 
 - keep the map dominant
-- use the telephone theme as a light atmospheric accent
-- make the hard card visually distinct without becoming cluttered
+- keep the visual theme understated and map-first

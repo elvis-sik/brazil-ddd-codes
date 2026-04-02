@@ -14,8 +14,6 @@ OUTPUT_APKG = REPO_ROOT / "out/brazil-ddd-codes.apkg"
 
 BLANK_MAP_FILENAME = "brazil_blank_municipal_map.png"
 BLANK_MAP_PATH = REPO_ROOT / "media/raster" / BLANK_MAP_FILENAME
-STATE_OUTLINE_FILENAME = "brazil_state_outline_map.png"
-STATE_OUTLINE_PATH = REPO_ROOT / "media/raster" / STATE_OUTLINE_FILENAME
 LOCATOR_DIR = REPO_ROOT / "media/raster/locator"
 
 MODEL_ID = 1_893_422_111
@@ -80,10 +78,8 @@ def fieldnames() -> list[str]:
         "missing_geometry_municipality_count",
         "sample_municipalities",
         "blank_map",
-        "state_outline_map",
         "locator_map",
         "Card_BlankMap_HTML",
-        "Card_StateOutlineMap_HTML",
         "Card_LocatorMap_HTML",
         "Card_States_HTML",
         "Card_SampleMunicipalities_HTML",
@@ -137,19 +133,6 @@ def shared_css() -> str:
   inset:11px;
   border:1px solid rgba(180,141,82,0.22);
   border-radius:20px;
-  pointer-events:none;
-}
-.plate::after{
-  content:"";
-  position:absolute;
-  right:-8px;
-  top:-2px;
-  width:130px;
-  height:130px;
-  opacity:0.13;
-  background-repeat:no-repeat;
-  background-size:contain;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%23a65a34' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M30 77c0-17 14-31 31-31s31 14 31 31'/%3E%3Cpath d='M24 77h72v18c0 5-4 9-9 9H33c-5 0-9-4-9-9V77Z'/%3E%3Cpath d='M39 47V31c0-11 9-20 20-20h2c11 0 20 9 20 20v16'/%3E%3Ccircle cx='60' cy='86' r='10'/%3E%3Cpath d='M20 80h-8M108 80h-8'/%3E%3C/g%3E%3C/svg%3E");
   pointer-events:none;
 }
 .eyebrow{
@@ -310,7 +293,7 @@ def model() -> genanki.Model:
                 "name": "DDD + Blank -> Locator",
                 "qfmt": """
 <div class="wrap"><div class="plate">
-  <div class="eyebrow">Brazilian Telephone Area Code</div>
+  <div class="eyebrow">Brazilian DDD Code</div>
   <h1 class="title">DDD {{ddd_code}}</h1>
   <div class="subtitle">Start from the municipal blank map, then reveal the highlighted area.</div>
   <div class="prompt">Which part of Brazil does this DDD cover?</div>
@@ -319,7 +302,7 @@ def model() -> genanki.Model:
 """,
                 "afmt": """
 <div class="wrap"><div class="plate">
-  <div class="eyebrow">Brazilian Telephone Area Code</div>
+  <div class="eyebrow">Brazilian DDD Code</div>
   <h1 class="title">DDD {{ddd_code}}</h1>
   <div class="subtitle">Start from the municipal blank map, then reveal the highlighted area.</div>
   <div class="prompt">Which part of Brazil does this DDD cover?</div>
@@ -360,26 +343,6 @@ def model() -> genanki.Model:
 </div></div>
 """,
             },
-            {
-                "name": "DDD + State Outline -> Locator",
-                "qfmt": """
-<div class="wrap"><div class="plate">
-  <div class="eyebrow">Hard Mode</div>
-  <h1 class="title">DDD {{ddd_code}}</h1>
-  <div class="subtitle">State outlines only.</div>
-  <div class="prompt">Use the state-only blank map, then reveal the locator.</div>
-  {{Card_StateOutlineMap_HTML}}
-</div></div>
-""",
-                "afmt": """
-{{FrontSide}}
-<div class="wrap"><div class="answer-panel">
-  <div class="answer-label">Locator Map</div>
-  {{Card_LocatorMap_HTML}}
-  <div class="meta-grid">{{Card_States_HTML}}{{Card_SampleMunicipalities_HTML}}</div>
-</div></div>
-""",
-            },
         ],
         css=shared_css(),
     )
@@ -408,14 +371,8 @@ def build_note(model: genanki.Model, row: dict[str, str]) -> genanki.Note:
         "missing_geometry_municipality_count": row.get("missing_geometry_municipality_count") or "0",
         "sample_municipalities": row.get("sample_municipalities") or "",
         "blank_map": BLANK_MAP_FILENAME,
-        "state_outline_map": STATE_OUTLINE_FILENAME,
         "locator_map": locator_filename,
         "Card_BlankMap_HTML": make_map_html(BLANK_MAP_FILENAME, f"Blank municipal map for DDD {ddd_code}"),
-        "Card_StateOutlineMap_HTML": make_map_html(
-            STATE_OUTLINE_FILENAME,
-            f"State outline map for DDD {ddd_code}",
-            tone="hard",
-        ),
         "Card_LocatorMap_HTML": make_map_html(locator_filename, f"Locator map for DDD {ddd_code}"),
         "Card_States_HTML": html_chip_group("States", states, "chip-copper"),
         "Card_SampleMunicipalities_HTML": html_chip_group("Sample Municipalities", municipalities),
@@ -435,7 +392,6 @@ def build_note(model: genanki.Model, row: dict[str, str]) -> genanki.Note:
 def media_files(rows: list[dict[str, str]]) -> list[str]:
     files = [
         str(BLANK_MAP_PATH),
-        str(STATE_OUTLINE_PATH),
     ]
     for row in rows:
         ddd_code = (row.get("ddd_code") or "").strip()
@@ -449,7 +405,7 @@ def main() -> int:
         raise FileNotFoundError(
             f"Missing {DDD_SUMMARY_CSV}. Run scripts/generate_maps.py first."
         )
-    if not BLANK_MAP_PATH.exists() or not STATE_OUTLINE_PATH.exists():
+    if not BLANK_MAP_PATH.exists():
         raise FileNotFoundError(
             "Missing blank deck media. Run scripts/generate_maps.py first."
         )

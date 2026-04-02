@@ -31,7 +31,7 @@ Everything here should be treated as editable project output, not as an authorit
 - `scripts/fetch_reference_data.py`: downloads and extracts the official municipality-to-CN reference table
 - `scripts/inspect_source_svg.py`: inspects the original SVG structure for reusable map-generation hooks
 - `scripts/generate_maps.py`: generates blank-map and locator-map assets
-- `scripts/build_apkg.py`: builds the Anki package with the three DDD card templates
+- `scripts/build_apkg.py`: builds the Anki package with the two DDD card templates
 - `DDD_NOTE_TYPE.md`: note fields and card-template contract
 - `DDD_DECK_PLAN.md`: current scope and build plan
 
