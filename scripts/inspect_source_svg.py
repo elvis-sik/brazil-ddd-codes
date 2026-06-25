@@ -24,8 +24,8 @@ def main() -> int:
     root = tree.getroot()
 
     tag_counts = Counter(local_name(element.tag) for element in root.iter())
-    class_counts = Counter()
-    id_counts = Counter()
+    class_counts: Counter[str] = Counter()
+    id_counts: Counter[str] = Counter()
 
     for element in root.iter():
         class_name = (element.get("class") or "").strip()

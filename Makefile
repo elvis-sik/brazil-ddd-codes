@@ -3,19 +3,24 @@ SHELL := /bin/bash
 
 PYTHON ?= python3
 UV ?= uv
+WORKBENCH ?= anki-workbench
+DOCKER_IMAGE ?= brazil-ddd-codes-anki-workbench
+WORKBENCH_DOCKERFILE ?= .tmp/anki-workbench/Dockerfile
 
 PY_FILES := $(shell git ls-files --cached --others --exclude-standard '*.py' ':!:out/**' ':!:dist/**' ':!:node_modules/**' ':!:.venv/**' ':!:input/**' ':!:media/**' ':!:backups/**' ':!:templates/**' ':!:drafts/**' ':!:_vendor/**')
 MYPY_FILES := $(shell git ls-files --cached --others --exclude-standard '*.py' ':!:tests/**' ':!:out/**' ':!:dist/**' ':!:node_modules/**' ':!:.venv/**' ':!:input/**' ':!:media/**' ':!:backups/**' ':!:templates/**' ':!:drafts/**' ':!:_vendor/**')
 JS_FILES := $(shell git ls-files --cached --others --exclude-standard '*.js' '*.mjs' ':!:out/**' ':!:dist/**' ':!:node_modules/**')
 SHELL_FILES := $(shell git ls-files --cached --others --exclude-standard '*.sh')
 
-.PHONY: help lint lint-paths lint-python lint-js lint-shell type test check
+.PHONY: help lint lint-paths lint-python lint-js lint-shell type test apkg workbench-dockerfile workbench-smoke check
 
 help:
 	@printf "Available targets:\n"
 	@printf "  make lint   Run linters and source hygiene checks\n"
 	@printf "  make type   Run type checks where typed source exists\n"
 	@printf "  make test   Run unit tests and repository hygiene tests\n"
+	@printf "  make apkg   Build the Anki package\n"
+	@printf "  make workbench-smoke  Build the APKG and run disposable Anki smoke\n"
 	@printf "  make check  Run lint, type, and test\n"
 
 lint: lint-paths lint-python lint-js lint-shell
@@ -69,5 +74,17 @@ test:
 	@if [ -f package.json ] && node -e "const p=require('./package.json'); process.exit(p.scripts && p.scripts.test ? 0 : 1)"; then \
 		npm test; \
 	fi
+
+apkg:
+	$(UV) run --extra deck python scripts/fetch_map_assets.py
+	$(UV) run --extra deck python scripts/generate_maps.py
+	$(UV) run --extra deck python scripts/build_apkg.py
+
+workbench-dockerfile:
+	$(WORKBENCH) dockerfile --out $(WORKBENCH_DOCKERFILE)
+
+workbench-smoke: apkg workbench-dockerfile
+	docker build -f $(WORKBENCH_DOCKERFILE) -t $(DOCKER_IMAGE) .
+	docker run --rm --mount type=bind,source="$(CURDIR)",target=/workspace -w /workspace $(DOCKER_IMAGE)
 
 check: lint type test

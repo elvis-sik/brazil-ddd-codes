@@ -22,6 +22,14 @@ package = false
 [tool.uv.pip]
 exclude-newer = "7 days"
 
+[tool.anki-addon-workbench]
+project_name = "Brazil DDD Codes"
+seed_apkgs = ["out/brazil-ddd-codes.apkg"]
+anki_version = "25.09"
+docker_image = "brazil-ddd-codes-anki-workbench"
+docker_workbench_spec = "anki-addon-workbench[gui]==0.4.0"
+deck_smoke_render_limit = 3
+
 [tool.ruff]
 line-length = 100
 
