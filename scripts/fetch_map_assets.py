@@ -2,6 +2,8 @@
 from __future__ import annotations
 
 import csv
+import gzip
+import shutil
 import time
 import urllib.error
 import urllib.request
@@ -10,9 +12,14 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 SOURCE_CSV = REPO_ROOT / "data/raw/map_asset_sources.csv"
+BUNDLED_ASSET_DIR = REPO_ROOT / "data/raw/map-assets"
 DEST_BY_ASSET_ID = {
     "ddd_brazil_map_commons": REPO_ROOT / "media/source/Mapa_do_Brasil_por_codigo_DDD.svg",
     "blank_brazil_states_commons": REPO_ROOT / "media/source/Blank_Map_of_Brazil.svg",
+}
+BUNDLED_BY_ASSET_ID = {
+    "ddd_brazil_map_commons": BUNDLED_ASSET_DIR / "Mapa_do_Brasil_por_codigo_DDD.svg.gz",
+    "blank_brazil_states_commons": BUNDLED_ASSET_DIR / "Blank_Map_of_Brazil.svg.gz",
 }
 
 USER_AGENT = (
@@ -67,9 +74,20 @@ def download(url: str, dest: Path) -> None:
             time.sleep(delay)
 
 
+def restore_bundled_asset(asset_id: str, dest: Path) -> bool:
+    bundled_path = BUNDLED_BY_ASSET_ID.get(asset_id)
+    if bundled_path is None or not bundled_path.exists():
+        return False
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    with gzip.open(bundled_path, "rb") as source, dest.open("wb") as target:
+        shutil.copyfileobj(source, target)
+    return True
+
+
 def main() -> int:
     rows = read_rows(SOURCE_CSV)
     downloaded = 0
+    restored = 0
     skipped = 0
 
     for row in rows:
@@ -82,11 +100,15 @@ def main() -> int:
             skipped += 1
             print(f"skip  {dest.relative_to(REPO_ROOT)}")
             continue
+        if restore_bundled_asset(asset_id, dest):
+            restored += 1
+            print(f"restore {dest.relative_to(REPO_ROOT)}")
+            continue
         print(f"fetch {dest.relative_to(REPO_ROOT)}")
         download(url, dest)
         downloaded += 1
 
-    print(f"done: downloaded={downloaded} skipped={skipped}")
+    print(f"done: restored={restored} downloaded={downloaded} skipped={skipped}")
     return 0
 
 
