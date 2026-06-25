@@ -2,6 +2,8 @@
 from __future__ import annotations
 
 import csv
+import time
+import urllib.error
 import urllib.request
 from pathlib import Path
 
@@ -18,11 +20,23 @@ USER_AGENT = (
     "AppleWebKit/537.36 (KHTML, like Gecko) "
     "Chrome/123.0.0.0 Safari/537.36"
 )
+MAX_ATTEMPTS = 6
+RETRYABLE_STATUS_CODES = {429, 500, 502, 503, 504}
 
 
 def read_rows(path: Path) -> list[dict[str, str]]:
     with path.open("r", encoding="utf-8", newline="") as handle:
         return list(csv.DictReader(handle))
+
+
+def retry_delay(exc: urllib.error.HTTPError, attempt: int) -> float:
+    retry_after = exc.headers.get("Retry-After")
+    if retry_after:
+        try:
+            return min(float(retry_after), 120.0)
+        except ValueError:
+            pass
+    return min(120.0, 5.0 * 2 ** (attempt - 1))
 
 
 def download(url: str, dest: Path) -> None:
@@ -33,9 +47,24 @@ def download(url: str, dest: Path) -> None:
             "Accept": "image/svg+xml,image/*;q=0.9,*/*;q=0.8",
         },
     )
-    with urllib.request.urlopen(request, timeout=180) as response:
-        dest.parent.mkdir(parents=True, exist_ok=True)
-        dest.write_bytes(response.read())
+    for attempt in range(1, MAX_ATTEMPTS + 1):
+        try:
+            with urllib.request.urlopen(request, timeout=180) as response:
+                dest.parent.mkdir(parents=True, exist_ok=True)
+                dest.write_bytes(response.read())
+                return
+        except urllib.error.HTTPError as exc:
+            if exc.code not in RETRYABLE_STATUS_CODES or attempt == MAX_ATTEMPTS:
+                raise
+            delay = retry_delay(exc, attempt)
+            print(f"retry {attempt}/{MAX_ATTEMPTS} after HTTP {exc.code}: waiting {delay:.0f}s")
+            time.sleep(delay)
+        except urllib.error.URLError:
+            if attempt == MAX_ATTEMPTS:
+                raise
+            delay = min(120.0, 5.0 * 2 ** (attempt - 1))
+            print(f"retry {attempt}/{MAX_ATTEMPTS} after network error: waiting {delay:.0f}s")
+            time.sleep(delay)
 
 
 def main() -> int:
