@@ -2,7 +2,6 @@
 
 [![Anki Workbench](https://github.com/elvis-sik/brazil-ddd-codes/actions/workflows/anki-workbench.yml/badge.svg)](https://github.com/elvis-sik/brazil-ddd-codes/actions/workflows/anki-workbench.yml)
 ![Python 3.12+](https://img.shields.io/badge/python-3.12%2B-blue)
-![Anki Workbench 0.4.0](https://img.shields.io/badge/anki--addon--workbench-0.4.0-informational)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
 An Anki deck generator workspace for Brazil's `DDD` telephone area codes, with an emphasis on map-based recognition cards and reproducible media generation.
@@ -92,14 +91,6 @@ Build the deck package:
 Output:
 
 - `out/brazil-ddd-codes.apkg`
-
-## Preview screenshot
-
-The README screenshot is generated from the built APKG in a disposable Anki profile:
-
-```sh
-uv run --extra dev python scripts/capture_readme_screenshot.py
-```
 
 ## Primary source
 
