@@ -1,6 +1,6 @@
 # DDD Note Type
 
-Single note type: `Brazil DDD`.
+Single note type: `Brazil DDD+`.
 
 One note per `DDD` code.
 

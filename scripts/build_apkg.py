@@ -286,7 +286,7 @@ def shared_css() -> str:
 def model() -> genanki.Model:
     return genanki.Model(
         MODEL_ID,
-        "Brazil DDD",
+        "Brazil DDD+",
         fields=[{"name": name} for name in fieldnames()],
         templates=[
             {
