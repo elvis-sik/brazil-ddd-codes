@@ -8,17 +8,6 @@ An Anki deck generator workspace for Brazil's `DDD` telephone area codes, with a
 
 ![Brazil DDD card preview](docs/screenshots/readme-preview.png)
 
-## AI provenance
-
-This repository was created with substantial AI assistance, including:
-
-- project scaffolding
-- source-asset inspection
-- SVG and raster asset-generation scripts
-- documentation drafts
-
-Everything here should be treated as editable project output, not as an authority in itself. Human review still matters, especially for card ergonomics, Brazil-specific geography wording, and map readability inside Anki.
-
 ## Goals
 
 - start from a verified public source map with clear provenance
