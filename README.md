@@ -1,6 +1,6 @@
 # brazil-ddd-codes
 
-[![Anki Workbench](https://github.com/elvis-sik/brazil-ddd-codes/actions/workflows/anki-workbench.yml/badge.svg)](https://github.com/elvis-sik/brazil-ddd-codes/actions/workflows/anki-workbench.yml)
+[![Anki Workbench](https://github.com/ritornello-labs/brazil-ddd-codes/actions/workflows/anki-workbench.yml/badge.svg)](https://github.com/ritornello-labs/brazil-ddd-codes/actions/workflows/anki-workbench.yml)
 [![AnkiWeb](https://img.shields.io/badge/AnkiWeb-shared_deck-15a5ef)](https://ankiweb.net/shared/info/1860702413)
 ![Python 3.12+](https://img.shields.io/badge/python-3.12%2B-blue)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
