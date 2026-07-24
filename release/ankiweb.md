@@ -4,7 +4,7 @@ tags: brazil geography maps phone-codes ddd
 support_url: https://github.com/ritornello-labs/brazil-ddd-codes
 ---
 
-![Brazil DDD card preview](https://raw.githubusercontent.com/elvis-sik/brazil-ddd-codes/main/docs/screenshots/readme-preview.png)
+![Brazil DDD card preview](https://raw.githubusercontent.com/ritornello-labs/brazil-ddd-codes/main/docs/screenshots/readme-preview.png)
 
 Map-based Anki cards for learning Brazil's `DDD` telephone area codes.
 
